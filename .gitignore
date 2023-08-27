@@ -1,3 +1,9 @@
 node_modules
 dist
 .vscode
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+cdk.context.json
+cdk-outputs.json
