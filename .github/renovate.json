@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 20,
+  "timezone": "America/New_York",
+  "packageRules": [
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchPackagePatterns": [
+        ".*eslint.*",
+        ".*rollup.*",
+        "@microsoft/api-extractor",
+        "@types.*",
+        "esbuild-register",
+        "esbuild",
+        "mocha",
+        "semantic-release",
+        "tslib",
+        "typescript"
+      ],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
+}
