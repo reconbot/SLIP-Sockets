@@ -12,8 +12,8 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "git@github.com:reconbot/SLIP-Sockets.git",
-  "homepage": "https://github.com/reconbot/SLIP-Sockets",
+  "repository": "git@github.com:reconbot/slip-sockets.git",
+  "homepage": "https://github.com/reconbot/slip-sockets",
   "scripts": {
     "test": "node -r esbuild-register --test lib/*-test.ts",
     "lint": "tsc && eslint lib/**/*.ts",
