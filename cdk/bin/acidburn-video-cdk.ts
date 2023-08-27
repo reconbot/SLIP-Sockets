@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register'
 import * as cdk from 'aws-cdk-lib'
-import { WebsocketCallback } from '../stacks/websocket-callback-stack'
+import { SlipSocketStack } from '../stacks/slip-socket-stack'
 
 const { TARGET_URL, JWT_SECRET, STACK_NAME = 'slip-sockets', DOMAIN_NAME } = process.env
 
@@ -14,7 +14,7 @@ if (!JWT_SECRET) {
 }
 
 const app = new cdk.App()
-new WebsocketCallback(app, STACK_NAME, {
+new SlipSocketStack(app, STACK_NAME, {
   domain: DOMAIN_NAME,
   targetUrl: TARGET_URL,
   jwtSecret: JWT_SECRET,

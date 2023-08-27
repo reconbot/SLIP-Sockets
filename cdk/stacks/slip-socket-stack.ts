@@ -4,11 +4,11 @@ import { WebSocket } from '../resources/WebSocket'
 import { ControlApi } from '../resources/ControlApi'
 import { DDB } from '../resources/DDB'
 
-export class WebsocketCallback extends cdk.Stack {
+export class SlipSocketStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: cdk.StackProps & {
-    domain?: string,
     targetUrl: string,
     jwtSecret: string,
+    domain?: string,
   }) {
     super(scope, id, props)
 

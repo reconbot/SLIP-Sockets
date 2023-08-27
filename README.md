@@ -47,7 +47,7 @@ It also has a GSI for fetching connections in a channel
 
 ## CDK
 
-There is one stack defined in this project. It's name is defaults to `slip-sockets` but it can be configured with environment variables.
+You may clone this repository and use the CDK cli to deploy the infrastructure with ENV varible configurations. It's name is defaults to `slip-sockets` but it can be configured with environment variables.
 
 The following environment variables are used to configure the stack;
 
