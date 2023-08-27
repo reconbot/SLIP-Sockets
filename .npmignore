@@ -1,12 +1,13 @@
 .eslintrc.js
 .github
 .gitignore
+.node-version
 .releaserc
 .vscode
 bundle-types.mjs
+cdk
 lib
 package-lock.json
 rollup.config.mjs
 tsconfig-build.json
 tsconfig.json
-cdk
