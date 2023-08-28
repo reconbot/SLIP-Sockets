@@ -36,8 +36,8 @@ importers:
         specifier: 6.4.1
         version: 6.4.1(eslint@8.48.0)(typescript@5.2.2)
       dts-buddy:
-        specifier: 0.2.3
-        version: 0.2.3
+        specifier: 0.2.4
+        version: 0.2.4
       esbuild:
         specifier: 0.19.2
         version: 0.19.2
@@ -2282,8 +2282,8 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /dts-buddy@0.2.3:
-    resolution: {integrity: sha512-uU3oU9H9D9rEhXWtPtB0neLEkONnclbgzbCEzEiBIHpm9lWhowGLfq3rdtorG0SaKwRdmb3caE19y9/Kd7DJvQ==}
+  /dts-buddy@0.2.4:
+    resolution: {integrity: sha512-41d7aGv2DXJYlzeKSKHf0GtpCC8OdpEHhz+aqjylKV5aP3fl4APzNmQ5hL5vSKZMaO/lrkrKWC+HQrxl+mcgUw==}
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.5
