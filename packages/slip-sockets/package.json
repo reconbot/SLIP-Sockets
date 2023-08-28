@@ -1,6 +1,6 @@
 {
   "name": "slip-sockets",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
