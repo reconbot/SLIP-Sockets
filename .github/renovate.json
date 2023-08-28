@@ -13,12 +13,10 @@
       "matchPackagePatterns": [
         ".*eslint.*",
         ".*rollup.*",
-        "@microsoft/api-extractor",
         "@types.*",
         "esbuild-register",
         "esbuild",
         "mocha",
-        "semantic-release",
         "tslib",
         "typescript"
       ],

@@ -23,13 +23,11 @@
   "repository": "git@github.com:reconbot/SLIP-Sockets.git",
   "homepage": "https://github.com/reconbot/SLIP-Sockets",
   "scripts": {
-    "test": "node -r esbuild-register --test lib/*-test.ts",
-    "lint": "tsc && eslint lib/**/*.ts",
-    "format": "eslint lib/**/*.ts --fix",
+    "lint": "tsc && eslint {bin,resources,stacks}/**/*.ts",
+    "format": "eslint {bin,resources,stacks}/**/*.ts --fix",
     "clean": "rm -rf dist",
     "build": "npm run clean && rollup -c && node bundle-types.mjs",
     "prepublishOnly": "npm run build",
-    "semantic-release": "semantic-release",
     "cdk": "cdk",
     "deploy:production": "cdk deploy '*production' --outputs-file ./cdk-outputs.json",
     "deploy:staging": "cdk deploy '*staging' --outputs-file ./cdk-outputs.json"
