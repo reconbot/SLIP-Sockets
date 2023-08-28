@@ -2,7 +2,7 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 
-export default {
+export default [{
   input: {
     index: './stacks/slip-socket-stack.ts',
   },
@@ -27,4 +27,25 @@ export default {
     'slip-sockets',
     'source-map-support',
   ],
-}
+},
+{
+  input: {
+    'ControlApi.handler': './resources/ControlApi.handler.ts',
+    'WebSocket.handler': './resources/WebSocket.handler.ts',
+  },
+  plugins: [
+    typescript(),
+    nodeResolve(),
+  ],
+  output: {
+    format: 'esm',
+    dir: './dist/',
+  },
+  external: [
+    '@aws-sdk/client-apigatewaymanagementapi',
+    '@aws-sdk/client-dynamodb',
+    '@aws-sdk/lib-dynamodb',
+    'slip-sockets',
+    'streaming-iterables',
+  ],
+}]
