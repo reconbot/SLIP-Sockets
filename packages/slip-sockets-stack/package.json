@@ -1,0 +1,59 @@
+{
+  "name": "@slip-sockets/stack",
+  "version": "0.0.0",
+  "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index-esm.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "packageManager": "pnpm@8.7.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": "git@github.com:reconbot/SLIP-Sockets.git",
+  "homepage": "https://github.com/reconbot/SLIP-Sockets",
+  "scripts": {
+    "lint": "tsc && eslint {bin,resources,stacks}/**/*.ts",
+    "format": "eslint {bin,resources,stacks}/**/*.ts --fix",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && rollup -c && node bundle-types.mjs",
+    "prepublishOnly": "npm run build",
+    "cdk": "cdk",
+    "deploy:production": "cdk deploy '*production' --outputs-file ./cdk-outputs.json",
+    "deploy:staging": "cdk deploy '*staging' --outputs-file ./cdk-outputs.json"
+  },
+  "keywords": [
+    "websockets",
+    "lambda",
+    "api-gateway",
+    "cdk"
+  ],
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "ts-node": "10.9.1",
+    "wscat": "5.2.0"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-apigatewayv2-alpha": "2.93.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.93.0-alpha.0",
+    "@aws-sdk/client-apigatewaymanagementapi": "3.398.0",
+    "@aws-sdk/client-dynamodb": "3.398.0",
+    "@aws-sdk/lib-dynamodb": "3.398.0",
+    "aws-cdk-lib": "2.93.0",
+    "aws-cdk": "2.93.0",
+    "constructs": "10.2.69",
+    "slip-sockets": "workspace:*",
+    "source-map-support": "0.5.21",
+    "streaming-iterables": "8.0.0"
+  }
+}

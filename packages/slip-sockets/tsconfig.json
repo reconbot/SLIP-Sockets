@@ -12,13 +12,11 @@
     "target": "es2017",
     "useUnknownInCatchVariables": false,
   },
-  "include": [
-    "lib/**/*.ts",
-  ],
+  "include": ["lib"],
   "exclude": [
     "node_modules",
     "lib/*-test.ts",
-    "cdk/cdk.out"
+    "dist",
   ],
   // necessary for tests
   "ts-node": {

@@ -17,7 +17,7 @@ jobs:
       - run: corepack enable
       - run: pnpm i
       - name: Test
-        run: pnpm test
+        run: pnpm --parallel --aggregate-output -r test
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -28,5 +28,6 @@ jobs:
           node-version: 18
       - run: corepack enable
       - run: pnpm i
+      - run: pnpm -r build # TSC needs should probably figure out how to fix it later
       - name: Lint
-        run: pnpm lint
+        run: pnpm --parallel --aggregate-output -r lint

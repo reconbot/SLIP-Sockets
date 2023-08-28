@@ -1,10 +1,9 @@
 import type { APIGatewayProxyWebsocketEventV2, APIGatewayProxyWebsocketHandlerV2 } from 'aws-lambda'
-import { JWT } from '../../lib/JWT'
-import { ControlPlaneBackendEvents, FromWebSocketServer } from '../../lib/types'
-import { parseBackendEvents, processCommand } from '../../lib/commands'
-import { APIGWebSocketController } from '../../lib/APIGWebSocketController'
-import { assertUnreachable } from '../../lib/utils'
-import { DDBClient } from '../../lib/DDBClient'
+import { JWT, ControlPlaneBackendEvents, FromWebSocketServer } from 'slip-sockets'
+import { parseBackendEvents, processCommand } from './commands'
+import { APIGWebSocketController } from './APIGWebSocketController'
+import { assertUnreachable } from './assertUnreachable'
+import { DDBClient } from './DDBClient'
 
 const CALLBACK_URL = process.env.CALLBACK_URL
 if (!CALLBACK_URL) {
