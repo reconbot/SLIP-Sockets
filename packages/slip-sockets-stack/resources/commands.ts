@@ -1,6 +1,6 @@
 import { consume, pipeline, transform } from 'streaming-iterables'
-import { ControlPlaneEvent, FromBackend } from './types'
-import { assertUnreachable } from './utils'
+import { ControlPlaneEvent, FromBackend } from 'slip-sockets/lib/types'
+import { assertUnreachable } from './assertUnreachable'
 import { DDBClient } from './DDBClient'
 import { APIGWebSocketController, ignoreDisconnected } from './APIGWebSocketController'
 

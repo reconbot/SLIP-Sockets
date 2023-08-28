@@ -1,0 +1,43 @@
+{
+  "name": "slip-sockets",
+  "version": "0.0.0-development",
+  "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index-esm.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "packageManager": "pnpm@8.7.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": "git@github.com:reconbot/SLIP-Sockets.git",
+  "homepage": "https://github.com/reconbot/SLIP-Sockets",
+  "scripts": {
+    "test": "node -r esbuild-register --test lib/*-test.ts",
+    "lint": "tsc && eslint lib/**/*.ts",
+    "format": "eslint lib/**/*.ts --fix",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && rollup -c && node bundle-types.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "websockets",
+    "lambda",
+    "api-gateway",
+    "cdk"
+  ],
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "jsonwebtoken": "9.0.1"
+  }
+}

@@ -1,9 +1,9 @@
 import type { APIGatewayProxyHandlerV2 } from 'aws-lambda'
-import { APIGWebSocketController } from '../../lib/APIGWebSocketController'
-import { parseControlPlaneCommands, processCommand } from '../../lib/commands'
-import { JWT } from '../../lib/JWT'
-import { DDBClient } from '../../lib/DDBClient'
-import { parseBody } from '../../lib/utils'
+import { APIGWebSocketController } from './APIGWebSocketController'
+import { parseControlPlaneCommands, processCommand } from './commands'
+import { JWT } from 'slip-sockets'
+import { DDBClient } from './DDBClient'
+import { parseBody } from './parseBody'
 
 const CALLBACK_URL = process.env.CALLBACK_URL
 if (!CALLBACK_URL) {
