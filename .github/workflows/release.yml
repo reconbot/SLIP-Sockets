@@ -16,9 +16,13 @@ jobs:
         with:
           node-version: 18
       - run: corepack enable
+      - run: pnpm install -g pnpm
       - run: pnpm i
-      - name: Release
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm publish -r
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: echo "don't do it"
