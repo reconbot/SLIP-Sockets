@@ -17,7 +17,7 @@ jobs:
       - run: corepack enable
       - run: pnpm i
       - name: Test
-        run: pnpm -r test
+        run: pnpm --parallel --aggregate-output -r test
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -29,4 +29,4 @@ jobs:
       - run: corepack enable
       - run: pnpm i
       - name: Lint
-        run: pnpm -r lint
+        run: pnpm --parallel --aggregate-output -r lint
