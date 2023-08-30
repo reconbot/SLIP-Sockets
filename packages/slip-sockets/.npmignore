@@ -2,3 +2,4 @@ bundle-types.mjs
 lib
 rollup.config.mjs
 tsconfig.json
+CHANGELOG.md

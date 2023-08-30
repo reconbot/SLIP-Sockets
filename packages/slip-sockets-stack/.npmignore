@@ -5,3 +5,4 @@ rollup.config.mjs
 stacks
 tsconfig.json
 bin
+CHANGELOG.md
