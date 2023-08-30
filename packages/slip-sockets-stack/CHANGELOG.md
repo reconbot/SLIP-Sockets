@@ -1,5 +1,12 @@
 # @slip-sockets/stack
 
+## 2.0.2
+
+### Patch Changes
+
+- Testing release creation
+  - slip-sockets@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@slip-sockets/stack",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
