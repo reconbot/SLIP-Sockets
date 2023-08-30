@@ -6,8 +6,6 @@ const handlerDependencies = [
   '@aws-sdk/client-apigatewaymanagementapi',
   '@aws-sdk/client-dynamodb',
   '@aws-sdk/lib-dynamodb',
-  'slip-sockets',
-  'streaming-iterables',
 ]
 
 export default [{
@@ -45,6 +43,7 @@ export default [{
   plugins: [
     typescript(),
     nodeResolve(),
+    commonjs(),
   ],
   output: {
     format: 'esm',
@@ -59,6 +58,7 @@ export default [{
   plugins: [
     typescript(),
     nodeResolve(),
+    commonjs(),
   ],
   output: {
     format: 'esm',

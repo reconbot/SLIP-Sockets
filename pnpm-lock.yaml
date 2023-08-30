@@ -89,16 +89,16 @@ importers:
       constructs:
         specifier: 10.2.70
         version: 10.2.70
-      slip-sockets:
-        specifier: workspace:*
-        version: link:../slip-sockets
       source-map-support:
         specifier: 0.5.21
         version: 0.5.21
+    devDependencies:
+      slip-sockets:
+        specifier: workspace:*
+        version: link:../slip-sockets
       streaming-iterables:
         specifier: 8.0.0
         version: 8.0.0
-    devDependencies:
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@20.5.7)(typescript@5.2.2)
@@ -3854,7 +3854,7 @@ packages:
   /streaming-iterables@8.0.0:
     resolution: {integrity: sha512-o0TmSGXWawZGbygg1xnvEMup+HIQSu2M3iMUBLvYFBVSZKJNOi6WG6rvuEtDEUlbH4eimtf7Aitot3V4tSru4w==}
     engines: {node: '>=18'}
-    dev: false
+    dev: true
 
   /string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}

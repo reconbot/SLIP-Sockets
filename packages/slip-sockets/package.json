@@ -2,6 +2,10 @@
   "name": "slip-sockets",
   "version": "2.0.2",
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
+  "author": {
+    "name": "Francis Gulotta",
+    "email": "wizard@roborooter.com"
+  },
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "exports": {

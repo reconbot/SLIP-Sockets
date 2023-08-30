@@ -2,6 +2,10 @@
   "name": "@slip-sockets/stack",
   "version": "2.0.2",
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
+  "author": {
+    "name": "Francis Gulotta",
+    "email": "wizard@roborooter.com"
+  },
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "exports": {
@@ -36,10 +40,13 @@
     "websockets",
     "lambda",
     "api-gateway",
-    "cdk"
+    "cdk",
+    "awscdk"
   ],
   "license": "GPL-3.0-or-later",
   "devDependencies": {
+    "slip-sockets": "workspace:*",
+    "streaming-iterables": "8.0.0",
     "ts-node": "10.9.1",
     "wscat": "5.2.0"
   },
@@ -49,11 +56,11 @@
     "@aws-sdk/client-apigatewaymanagementapi": "3.398.0",
     "@aws-sdk/client-dynamodb": "3.398.0",
     "@aws-sdk/lib-dynamodb": "3.398.0",
-    "aws-cdk-lib": "2.93.0",
+    "source-map-support": "0.5.21"
+  },
+  "peerDependencies": {
     "aws-cdk": "2.93.0",
-    "constructs": "10.2.70",
-    "slip-sockets": "workspace:*",
-    "source-map-support": "0.5.21",
-    "streaming-iterables": "8.0.0"
+    "aws-cdk-lib": "2.93.0",
+    "constructs": "10.2.70"
   }
 }
