@@ -1,5 +1,11 @@
 # @slip-sockets/stack
 
+## 3.0.0
+
+### Major Changes
+
+- ad26e48: Move CDK standard deps to peer deps for combatability reasons. Bundle the handler functions of all non aws code. This moves the dep on `slip-sockets` to a devdep.
+
 ## 2.0.2
 
 ### Patch Changes
