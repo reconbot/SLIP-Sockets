@@ -1,5 +1,12 @@
 # @slip-sockets/stack
 
+## 2.0.1
+
+### Patch Changes
+
+- 16d5019: Fix the type module definition so it works.
+  - slip-sockets@2.0.1
+
 ## 2.0.0
 
 ### Major Changes
