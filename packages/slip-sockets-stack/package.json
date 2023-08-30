@@ -51,7 +51,7 @@
     "@aws-sdk/lib-dynamodb": "3.398.0",
     "aws-cdk-lib": "2.93.0",
     "aws-cdk": "2.93.0",
-    "constructs": "10.2.69",
+    "constructs": "10.2.70",
     "slip-sockets": "workspace:*",
     "source-map-support": "0.5.21",
     "streaming-iterables": "8.0.0"
