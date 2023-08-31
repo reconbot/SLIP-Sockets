@@ -3,13 +3,18 @@ import { ControlPlaneEvent } from './types'
 import { parseWebSocketEvents } from './parseWebSocketEvents'
 import { SlipSocketConnection } from './SlipSocketConnection'
 
+export interface SlipSocketPublisherOptions {
+  controlApi: string
+  jwtSecret: string
+}
+
 export class SlipSocketPublisher {
   controlApi: string
   jwt: JWT
 
-  constructor({ controlApi, jwt }: { controlApi: string, jwt: JWT }) {
+  constructor({ controlApi, jwtSecret }: SlipSocketPublisherOptions) {
     this.controlApi = controlApi
-    this.jwt = jwt
+    this.jwt = new JWT({ jwtSecret })
   }
 
   async parseRequest(request: Request): Promise<SlipSocketConnection | null> {
