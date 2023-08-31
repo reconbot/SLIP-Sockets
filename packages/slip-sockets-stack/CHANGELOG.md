@@ -1,5 +1,11 @@
 # @slip-sockets/stack
 
+## 3.0.2
+
+### Patch Changes
+
+- continue to try to fix the handler file loading
+
 ## 3.0.1
 
 ### Patch Changes

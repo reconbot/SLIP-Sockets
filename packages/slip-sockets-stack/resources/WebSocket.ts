@@ -28,7 +28,7 @@ export class WebSocket extends Construct {
     super(scope, id)
 
     const eventHandler = new NodejsFunction(this, 'handler', {
-      entry: 'WebSocket.handler.js',
+      entry: __dirname + '/WebSocket.handler.js',
       runtime: Runtime.NODEJS_18_X,
       timeout: Duration.seconds(10),
       memorySize: 128,
