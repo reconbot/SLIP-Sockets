@@ -17,8 +17,7 @@ jobs:
           node-version: 18
       - run: corepack enable
       - run: pnpm i
-      # we need slip-sockets to be built even if it's not being published, pnpm wont build it if it doesn't need to be published
-      - run: cd packages/slip-sockets && pnpm build
+      - run: pnpm -r build
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
