@@ -1,5 +1,11 @@
 # @slip-sockets/stack
 
+## 3.0.1
+
+### Patch Changes
+
+- fix: lambda function handlers were not being found
+
 ## 3.0.0
 
 ### Major Changes

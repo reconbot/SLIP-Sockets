@@ -24,6 +24,7 @@ export class ControlApi extends Construct {
     super(scope, id)
 
     const eventHandler = new NodejsFunction(this, 'handler', {
+      entry: 'ControlApi.handler.js',
       runtime: Runtime.NODEJS_18_X,
       timeout: Duration.seconds(10),
       memorySize: 128,
