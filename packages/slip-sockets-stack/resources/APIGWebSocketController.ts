@@ -1,4 +1,5 @@
-import { ApiGatewayManagementApiClient, DeleteConnectionCommand, PostToConnectionCommand } from '@aws-sdk/client-apigatewaymanagementapi'
+import { ApiGatewayManagementApiClient, DeleteConnectionCommand, GetConnectionCommand, PostToConnectionCommand } from '@aws-sdk/client-apigatewaymanagementapi'
+import { setTimeout } from 'timers/promises'
 
 export class APIGWebSocketController {
   client: ApiGatewayManagementApiClient
@@ -21,6 +22,28 @@ export class APIGWebSocketController {
       ConnectionId: connectionId,
     })
     await this.client.send(command)
+  }
+
+  async info(connectionId: string) {
+    const command = new GetConnectionCommand({
+      ConnectionId: connectionId,
+    })
+    return this.client.send(command)
+  }
+
+  async pollForConnection(connectionId: string, timeout: number) {
+    const start = Date.now()
+    while (Date.now() - start < timeout) {
+      try {
+        return this.info(connectionId)
+      } catch (err) {
+        if (err.name !== 'GoneException') {
+          throw err
+        }
+        await setTimeout(100)
+      }
+    }
+    return null
   }
 }
 

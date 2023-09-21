@@ -1,125 +1,61 @@
 import { consume, pipeline, transform } from 'streaming-iterables'
-import { ControlPlaneEvent, FromBackend } from 'slip-sockets/lib/types'
+import { ControlEvent, JsonValue } from 'slip-sockets/lib/types'
 import { assertUnreachable } from './assertUnreachable'
 import { DDBClient } from './DDBClient'
 import { APIGWebSocketController, ignoreDisconnected } from './APIGWebSocketController'
 
-export function parseControlPlaneCommands(body: string | undefined): ControlPlaneEvent[] | null {
-  if (!body) {
-    return null
-  }
-  let data
-  try {
-    data = JSON.parse(body)
-  } catch (error) {
-    console.error({ error, body })
-    return null
-  }
-  if (!Array.isArray(data)) {
-    return null
-  }
-
-  for (const command of data as ControlPlaneEvent[]) {
-    const { target, event } = command
-    if (!target) {
-      return null
-    }
-    if (event.type === 'TEXT') {
-      if (typeof event.data !== 'string') {
-        return null
-      }
-      continue
-    }
-    if (event.type === 'DISCONNECT') {
-      continue
-    }
-    if (event.type === 'SUBSCRIBE') {
-      if (!event.target) {
-        return null
-      }
-      continue
-    }
-    if (event.type === 'UNSUBSCRIBE') {
-      if (!event.target) {
-        return null
-      }
-      continue
-    }
-    assertUnreachable(event)
-  }
-
-  return data as ControlPlaneEvent[]
-}
-
-export function parseBackendEvents(body: string | undefined): FromBackend[] | null {
-  if (!body) {
-    return null
-  }
-  let data
-  try {
-    data = JSON.parse(body)
-  } catch (error) {
-    return null
-  }
-  if (!Array.isArray(data)) {
-    return null
-  }
-
-  for (const event of data as FromBackend[]) {
-    if (event.type === 'ACCEPT') {
-      continue
-    }
-    if (event.type === 'TEXT') {
-      if (typeof event.data !== 'string') {
-        return null
-      }
-      continue
-    }
-    if (event.type === 'DISCONNECT') {
-      continue
-    }
-    if (event.type === 'SUBSCRIBE') {
-      if (!event.target) {
-        return null
-      }
-      continue
-    }
-    if (event.type === 'UNSUBSCRIBE') {
-      if (!event.target) {
-        return null
-      }
-      continue
-    }
-    assertUnreachable(event)
-  }
-
-  return data as FromBackend[]
-}
-
-export const processCommand = async ({ ddbClient, wsClient, command }: { ddbClient: DDBClient, wsClient: APIGWebSocketController; command: ControlPlaneEvent; }) => {
-  const { target, event } = command
-  if (event.type === 'TEXT') {
+export const processControlEvent = async ({ ddbClient, wsClient, event }: { ddbClient: DDBClient, wsClient: APIGWebSocketController; event: ControlEvent }) => {
+  if (event.type === 'PUBLISH_TEXT') {
     await pipeline(
-      () => ddbClient.itrConnectionsByChannel(target),
+      () => ddbClient.itrConnectionsByChannel(event.channelId),
       transform(10, connection => wsClient.send(connection.connectionId, event.data).catch(ignoreDisconnected)),
       consume,
     )
     return
   }
-  if (event.type === 'DISCONNECT') {
+
+  if (event.type === 'CLOSE_CHANNEL') {
+    await pipeline(
+      () => ddbClient.itrConnectionsByChannel(event.channelId),
+      transform(10, connection => wsClient.disconnect(connection.connectionId).catch(ignoreDisconnected)),
+      consume,
+    )
+    return
+  }
+
+  if (event.type === 'TEXT') {
+    await wsClient.send(event.connectionId, event.data).catch(ignoreDisconnected)
+    return
+  }
+
+  if (event.type === 'CLOSE') {
     await Promise.all([
-      wsClient.disconnect(target).catch(ignoreDisconnected),
-      ddbClient.disconnect(target),
+      wsClient.disconnect(event.connectionId).catch(ignoreDisconnected),
+      ddbClient.disconnect(event.connectionId),
     ])
     return
   }
+
   if (event.type === 'SUBSCRIBE') {
-    await ddbClient.subscribe({ connectionId: target, channel: event.target })
+    await ddbClient.subscribe({ connectionId: event.connectionId, channel: event.channel })
     return
   }
+
   if (event.type === 'UNSUBSCRIBE') {
-    await ddbClient.unsubscribe({ connectionId: target, channel: event.target })
+    await ddbClient.unsubscribe({ connectionId: event.connectionId, channel: event.channel })
     return
   }
+
+  if (event.type === 'SET_METADATA') {
+    await ddbClient.setMetadata({ connectionId: event.connectionId, metadata: event.metadata as JsonValue })
+    return
+  }
+
+  if (event.type === 'POLL_FOR_CONNECTION') {
+    const info = await wsClient.pollForConnection(event.connectionId, event.timeout)
+    console.log({ POLL_FOR_CONNECTION: info })
+    return
+  }
+
   assertUnreachable(event)
 }

@@ -1,7 +1,6 @@
 import { JWT } from './JWT'
-import { ControlPlaneEvent } from './types'
-import { parseWebSocketEvents } from './parseWebSocketEvents'
-import { SlipSocketConnection } from './SlipSocketConnection'
+import { ControlEvent, EventRequestDataSchema } from './types'
+import { SlipSocketEvent } from './SlipSocketConnection'
 
 export interface SlipSocketPublisherOptions {
   controlApi: string
@@ -17,30 +16,25 @@ export class SlipSocketPublisher {
     this.jwt = new JWT({ jwtSecret })
   }
 
-  async parseRequest(request: Request): Promise<SlipSocketConnection | null> {
+  async parseRequest(request: Request): Promise<SlipSocketEvent | null> {
     if (!this.jwt.verifyAuthTokenFromHeader(request.headers.get('authorization'), 'WebSocketEvent')) {
       console.error('bad token')
       return null
     }
-    const connectionId = request.headers.get('x-connection-id')
-    if (!connectionId) {
-      console.error('no connection id')
+
+    const events = EventRequestDataSchema.safeParse(await request.text())
+    if (!events.success) {
+      console.error('cannot parse events', events.error)
       return null
     }
-    const events = parseWebSocketEvents(await request.text())
-    if (!events) {
-      console.error('cannot parse events')
-      return null
-    }
-    return new SlipSocketConnection(connectionId, events)
+    return new SlipSocketEvent(events.data)
   }
 
-  async publish(target: string, data: string) {
-    const event: ControlPlaneEvent = { target, event: { type: 'TEXT', data } }
+  async send(events: ControlEvent[]) {
     const token = this.jwt.generateToken({ audience: 'ControlEvent', expiresIn: '1m' })
     const response = await fetch(this.controlApi, {
       method: 'POST',
-      body: JSON.stringify([event]),
+      body: JSON.stringify(events),
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/websocket-events',
@@ -49,7 +43,7 @@ export class SlipSocketPublisher {
     if (!response.ok) {
       const text = await response.text()
       const { status, statusText } = response
-      console.error({ target, data, token, status, statusText, text, body: JSON.stringify([event]), controlApi: this.controlApi })
+      console.error({ token, status, statusText, text, body: JSON.stringify(events), controlApi: this.controlApi })
       throw new Error(response.statusText)
     }
   }

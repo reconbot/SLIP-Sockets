@@ -3,9 +3,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 
 const handlerDependencies = [
-  '@aws-sdk/client-apigatewaymanagementapi',
-  '@aws-sdk/client-dynamodb',
-  '@aws-sdk/lib-dynamodb',
+  // all of these need a json import or something
+  /@aws-sdk\/.*/,
 ]
 
 export default [{

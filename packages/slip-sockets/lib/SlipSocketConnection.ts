@@ -1,15 +1,19 @@
-import { FromBackend, FromWebSocketServer } from './types'
+import { EventRequestData, EventResponseEvent, FromSlipServer, JsonObject } from './types'
 
-export class SlipSocketConnection {
+export class SlipSocketEvent {
   connectionId: string
-  inEvents: FromWebSocketServer[]
-  outEvents: FromBackend[]
+  inEvents: FromSlipServer[]
+  outEvents: EventResponseEvent[]
   accepted: boolean
   closed: boolean
+  metadata: JsonObject | null
+  newMetadata: undefined | JsonObject | null
 
-  constructor(connectionId: string, events: FromWebSocketServer[]) {
+  constructor({ connectionId, metadata, events }: EventRequestData) {
     this.connectionId = connectionId
     this.inEvents = events
+    this.metadata = metadata as JsonObject
+    this.newMetadata = undefined
     this.outEvents = []
     this.accepted = false
     this.closed = false
@@ -28,21 +32,45 @@ export class SlipSocketConnection {
   }
 
   subscribe(channel: string) {
-    this.outEvents.push({ type: 'SUBSCRIBE', target: channel })
+    const { connectionId } = this
+    this.queueEvent({ type: 'SUBSCRIBE', connectionId, channel: channel })
   }
 
   unsubscribe(channel: string) {
-    this.outEvents.push({ type: 'UNSUBSCRIBE', target: channel })
+    const { connectionId } = this
+    this.queueEvent({ type: 'UNSUBSCRIBE', connectionId, channel: channel })
+  }
+
+  sendText(data: string) {
+    const { connectionId } = this
+    this.queueEvent({ type: 'TEXT', connectionId, data })
+  }
+
+  publishText(channelId: string, data: string) {
+    this.queueEvent({ type: 'PUBLISH_TEXT', channelId, data })
+  }
+
+  setMetadata(metadata: JsonObject | null) {
+    this.newMetadata = metadata
+  }
+
+  queueEvent(event: EventResponseEvent) {
+    this.outEvents.push(event)
   }
 
   endResponse(): Response {
-    const events: FromBackend[] = [...this.outEvents]
+    const events = [...this.outEvents]
+    const { connectionId } = this
     if (this.accepted) {
-      events.unshift({ type: 'ACCEPT' })
+      events.unshift({ type: 'ACCEPT', connectionId })
+    }
+
+    if (this.newMetadata !== undefined) {
+      events.push({ type: 'SET_METADATA', connectionId, metadata: this.newMetadata })
     }
 
     if (this.closed) {
-      events.push({ type: 'DISCONNECT' })
+      events.push({ type: 'CLOSE', connectionId })
     }
     return new Response(JSON.stringify(events), {
       status: 200,

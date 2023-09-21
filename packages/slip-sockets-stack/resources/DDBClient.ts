@@ -1,6 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { DynamoDBDocument, QueryCommandInput } from '@aws-sdk/lib-dynamodb'
-import { Connection } from 'slip-sockets/lib/types'
+import { Connection, JsonValue } from 'slip-sockets/lib/types'
 import { consume, pipeline, transform } from 'streaming-iterables'
 
 export class DDBClient<T extends Connection = Connection> {
@@ -75,6 +75,18 @@ export class DDBClient<T extends Connection = Connection> {
       transform(10, this.unsubscribe),
       consume,
     )
+  }
+
+  async setMetadata({ connectionId, metadata }: { connectionId: string, metadata: JsonValue }): Promise<JsonValue> {
+    throw new Error('not implemented')
+    if (metadata === null) {
+      // delete the metadata
+      return null
+    }
+  }
+
+  async getMetadata(connectionId: string): Promise<JsonValue | null> {
+    throw new Error('not implemented')
   }
 
   itrConnectionsByChannel(channel: string) {

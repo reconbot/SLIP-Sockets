@@ -13,6 +13,7 @@ import { Table } from 'aws-cdk-lib/aws-dynamodb'
 
 export class WebSocket extends Construct {
   stage: WebSocketStage
+  lambda: NodejsFunction
 
   constructor(scope: Construct, id: string, {
     targetUrl,
@@ -40,7 +41,7 @@ export class WebSocket extends Construct {
       },
       logRetention: RetentionDays.THREE_MONTHS,
     })
-
+    this.lambda = eventHandler
     connectionsTable.grantReadWriteData(eventHandler)
 
     let dn
@@ -85,6 +86,11 @@ export class WebSocket extends Construct {
 
     this.stage.grantManagementApiAccess(eventHandler)
     eventHandler.addEnvironment('CALLBACK_URL', this.stage.callbackUrl)
+  }
+
+  registerControlLambda(controlLambda: NodejsFunction) {
+    this.lambda.addEnvironment('CONTROL_LAMBDA_ARN', controlLambda.functionArn)
+    controlLambda.grantInvoke(this.lambda)
   }
 }
 
