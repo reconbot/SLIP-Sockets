@@ -33,7 +33,8 @@
     "build": "rollup -c && node bundle-types.mjs",
     "cdk": "cdk",
     "deploy:production": "cdk deploy '*production' --outputs-file ./cdk-outputs.json",
-    "deploy:staging": "cdk deploy '*staging' --outputs-file ./cdk-outputs.json"
+    "deploy:staging": "cdk deploy '*staging' --outputs-file ./cdk-outputs.json",
+    "test": "node -r esbuild-register --test ./**/*.test.ts"
   },
   "keywords": [
     "websockets",
@@ -44,6 +45,9 @@
   ],
   "license": "GPL-3.0-or-later",
   "devDependencies": {
+    "dynalite": "^3.2.2",
+    "esbuild-register": "3.4.2",
+    "portfinder": "^1.0.32",
     "streaming-iterables": "8.0.0",
     "ts-node": "10.9.1",
     "wscat": "5.2.0"

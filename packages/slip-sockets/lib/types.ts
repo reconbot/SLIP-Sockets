@@ -1,13 +1,5 @@
 import { z } from 'zod'
 
-const ConnectionSchema = z.object({
-  connectionId: z.string(),
-  channel: z.string(),
-  ttl: z.number(),
-})
-
-export type Connection = z.infer<typeof ConnectionSchema>;
-
 const OpenEventSchema = z.object({
   type: z.literal('OPEN'),
   connectionId: z.string(),

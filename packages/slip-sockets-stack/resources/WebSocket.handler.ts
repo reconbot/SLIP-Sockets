@@ -30,7 +30,7 @@ if (!CONTROL_LAMBDA_ARN) {
 
 const jwt = new JWT({ jwtSecret: JWT_SECRET })
 const wsClient = new APIGWebSocketController(CALLBACK_URL)
-const ddbClient = new DDBClient(DDB_CONNECTIONS_TABLE)
+const ddbClient = new DDBClient({ tableName: DDB_CONNECTIONS_TABLE })
 const lambdaClient = new LambdaClient()
 
 const invokeControlLambdaAsync = async (events: ControlEvent[]) => {

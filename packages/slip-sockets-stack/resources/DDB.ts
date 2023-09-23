@@ -5,23 +5,27 @@ export class DDB extends Construct {
   connections: Table
   constructor(scope: Construct, id: string) {
     super(scope, id)
-    this.connections = new Table(this, 'Connections', {
+    this.connections = new Table(this, 'SlipSockets', {
       billingMode: BillingMode.PAY_PER_REQUEST,
       partitionKey: {
-        name: 'connectionId',
+        name: 'pk',
         type: AttributeType.STRING,
       },
       sortKey: {
-        name: 'channel',
+        name: 'sk',
         type: AttributeType.STRING,
       },
       timeToLiveAttribute: 'ttl',
     })
 
     this.connections.addGlobalSecondaryIndex({
-      indexName: 'byChannel',
+      indexName: 'GSI1',
       partitionKey: {
-        name: 'channel',
+        name: 'gsi1pk',
+        type: AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'gsi1sk',
         type: AttributeType.STRING,
       },
     })

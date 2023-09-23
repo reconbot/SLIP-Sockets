@@ -7,7 +7,7 @@ import { APIGWebSocketController, ignoreDisconnected } from './APIGWebSocketCont
 export const processControlEvent = async ({ ddbClient, wsClient, event }: { ddbClient: DDBClient, wsClient: APIGWebSocketController; event: ControlEvent }) => {
   if (event.type === 'PUBLISH_TEXT') {
     await pipeline(
-      () => ddbClient.itrConnectionsByChannel(event.channelId),
+      () => ddbClient.itrSubscriptionsByChannel(event.channelId),
       transform(10, connection => wsClient.send(connection.connectionId, event.data).catch(ignoreDisconnected)),
       consume,
     )
@@ -16,7 +16,7 @@ export const processControlEvent = async ({ ddbClient, wsClient, event }: { ddbC
 
   if (event.type === 'CLOSE_CHANNEL') {
     await pipeline(
-      () => ddbClient.itrConnectionsByChannel(event.channelId),
+      () => ddbClient.itrSubscriptionsByChannel(event.channelId),
       transform(10, connection => wsClient.disconnect(connection.connectionId).catch(ignoreDisconnected)),
       consume,
     )
