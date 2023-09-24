@@ -13,7 +13,7 @@ const AcceptEventSchema = z.object({
 const SetMetadataEventSchema = z.object({
   type: z.literal('SET_METADATA'),
   connectionId: z.string(),
-  metadata: z.nullable(z.unknown()), // JsonObject | null
+  metadata: z.unknown(), // JsonObject | null
 })
 
 export type SetMetaDataEvent = z.infer<typeof SetMetadataEventSchema>

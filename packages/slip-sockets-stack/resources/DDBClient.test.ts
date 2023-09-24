@@ -1,8 +1,8 @@
+import { describe, test, beforeEach, afterEach } from 'node:test'
+import { deepStrictEqual } from 'node:assert'
 import { collect } from 'streaming-iterables'
 import { DDBClient } from './DDBClient'
-import { describe, test, beforeEach, afterEach } from 'node:test'
 import { startDevDB } from './startDevDB'
-import assert, { deepStrictEqual, rejects } from 'node:assert'
 
 let dbInfo: Awaited<ReturnType<typeof startDevDB>>
 let ddbClient: DDBClient

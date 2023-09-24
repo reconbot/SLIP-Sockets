@@ -1,7 +1,7 @@
 import type { APIGatewayProxyWebsocketEventV2, APIGatewayProxyWebsocketHandlerV2 } from 'aws-lambda'
 import { JWT, ControlEvent, EventRequestData, EventResponseDataSchema, FromSlipServer, WebSocketOpenEventResponse, SetMetaDataEvent } from 'slip-sockets'
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda'
-import { processControlEvent } from './commands'
+import { processControlEvent } from './processControlEvent'
 import { APIGWebSocketController } from './APIGWebSocketController'
 import { assertUnreachable } from './assertUnreachable'
 import { DDBClient } from './DDBClient'
@@ -29,7 +29,7 @@ if (!CONTROL_LAMBDA_ARN) {
 }
 
 const jwt = new JWT({ jwtSecret: JWT_SECRET })
-const wsClient = new APIGWebSocketController(CALLBACK_URL)
+const wsClient = new APIGWebSocketController({ callbackUrl: CALLBACK_URL })
 const ddbClient = new DDBClient({ tableName: DDB_CONNECTIONS_TABLE })
 const lambdaClient = new LambdaClient()
 
@@ -96,11 +96,7 @@ export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
     events: [wsEvent],
   }
 
-  if (event.requestContext.eventType === 'DISCONNECT') {
-    // TODO cleanup ddb
-  }
-
-  const response = await fetch(TARGET_URL, {
+  const responsePromise = fetch(TARGET_URL, {
     method: 'POST',
     body: JSON.stringify(wsRequest),
     headers: {
@@ -108,6 +104,13 @@ export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
       'Content-Type': 'application/websocket-events',
     },
   })
+
+  if (event.requestContext.eventType === 'DISCONNECT') {
+    await ddbClient.disconnect(connectionId)
+  }
+
+  const response = await responsePromise
+
   if (!response.ok) {
     console.error({ message: 'Bad response from TARGET_URL', statusCode: response.status, statusText: response.statusText, body: await response.text()})
     return {

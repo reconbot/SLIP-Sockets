@@ -1,6 +1,6 @@
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { APIGWebSocketController } from './APIGWebSocketController'
-import { processControlEvent } from './commands'
+import { processControlEvent } from './processControlEvent'
 import { ControlEvent, JWT } from 'slip-sockets'
 import { DDBClient } from './DDBClient'
 import { parseBody } from './parseBody'
@@ -23,7 +23,7 @@ if (!DDB_CONNECTIONS_TABLE) {
 }
 
 const jwt = new JWT({ jwtSecret: JWT_SECRET })
-const wsClient = new APIGWebSocketController(CALLBACK_URL)
+const wsClient = new APIGWebSocketController({ callbackUrl: CALLBACK_URL })
 const ddbClient = new DDBClient({ tableName: DDB_CONNECTIONS_TABLE })
 
 const processEvents = async (events: ControlEvent[]) => {

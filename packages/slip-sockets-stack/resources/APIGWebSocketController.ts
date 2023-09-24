@@ -4,8 +4,8 @@ import { setTimeout } from 'timers/promises'
 export class APIGWebSocketController {
   client: ApiGatewayManagementApiClient
 
-  constructor(callbackUrl: string) {
-    this.client = new ApiGatewayManagementApiClient({ endpoint: callbackUrl })
+  constructor({ callbackUrl, client }: { callbackUrl: string, client?: undefined } | { callbackUrl?: undefined, client: ApiGatewayManagementApiClient }) {
+    this.client = client ?? new ApiGatewayManagementApiClient({ endpoint: callbackUrl })
   }
 
   async send(connectionId: string, data: string) {
