@@ -1,80 +1,80 @@
-import { z } from 'zod'
+import { infer as zInfer, literal as zLiteral, object as zObject, string as zString, unknown as zUnknown, discriminatedUnion, array as zArray, nullable as zNullable, number as zNumber } from 'zod'
 
-const OpenEventSchema = z.object({
-  type: z.literal('OPEN'),
-  connectionId: z.string(),
+const OpenEventSchema = zObject({
+  type: zLiteral('OPEN'),
+  connectionId: zString(),
 })
 
-const AcceptEventSchema = z.object({
-  type: z.literal('ACCEPT'),
-  connectionId: z.string(),
+const AcceptEventSchema = zObject({
+  type: zLiteral('ACCEPT'),
+  connectionId: zString(),
 })
 
-const SetMetadataEventSchema = z.object({
-  type: z.literal('SET_METADATA'),
-  connectionId: z.string(),
-  metadata: z.unknown(), // JsonObject | null
+const SetMetadataEventSchema = zObject({
+  type: zLiteral('SET_METADATA'),
+  connectionId: zString(),
+  metadata: zUnknown(), // JsonObject | null
 })
 
-export type SetMetaDataEvent = z.infer<typeof SetMetadataEventSchema>
+export type SetMetaDataEvent = zInfer<typeof SetMetadataEventSchema>
 
-const CloseEventSchema = z.object({
-  type: z.literal('CLOSE'),
-  connectionId: z.string(),
+const CloseEventSchema = zObject({
+  type: zLiteral('CLOSE'),
+  connectionId: zString(),
 })
 
-const CloseChannelEventSchema = z.object({
-  type: z.literal('CLOSE_CHANNEL'),
-  channelId: z.string(),
+const CloseChannelEventSchema = zObject({
+  type: zLiteral('CLOSE_CHANNEL'),
+  channelId: zString(),
 })
 
-const TextEventSchema = z.object({
-  type: z.literal('TEXT'),
-  connectionId: z.string(),
-  data: z.string(),
+const TextEventSchema = zObject({
+  type: zLiteral('TEXT'),
+  connectionId: zString(),
+  data: zString(),
 })
 
-const PublishTextEventSchema = z.object({
-  type: z.literal('PUBLISH_TEXT'),
-  channelId: z.string(),
-  data: z.string(),
+const PublishTextEventSchema = zObject({
+  type: zLiteral('PUBLISH_TEXT'),
+  channelId: zString(),
+  data: zString(),
 })
 
-const SubscribeEventSchema = z.object({
-  type: z.literal('SUBSCRIBE'),
-  connectionId: z.string(),
-  channel: z.string(),
+const SubscribeEventSchema = zObject({
+  type: zLiteral('SUBSCRIBE'),
+  connectionId: zString(),
+  channel: zString(),
 })
 
-const UnsubscribeEventSchema = z.object({
-  type: z.literal('UNSUBSCRIBE'),
-  connectionId: z.string(),
-  channel: z.string(),
+const UnsubscribeEventSchema = zObject({
+  type: zLiteral('UNSUBSCRIBE'),
+  connectionId: zString(),
+  channel: zString(),
 })
 
-const PollForConnectionEventSchema = z.object({
-  type: z.literal('POLL_FOR_CONNECTION'),
-  connectionId: z.string(),
-  timeout: z.number(),
+const PollForConnectionEventSchema = zObject({
+  type: zLiteral('POLL_FOR_CONNECTION'),
+  connectionId: zString(),
+  timeout: zNumber(),
 })
 
 // CONNECTION EVENTS
-const FromSlipServerSchema = z.discriminatedUnion('type', [OpenEventSchema, CloseEventSchema, TextEventSchema])
-export type FromSlipServer = z.infer<typeof FromSlipServerSchema>
+const FromSlipServerSchema = discriminatedUnion('type', [OpenEventSchema, CloseEventSchema, TextEventSchema])
+export type FromSlipServer = zInfer<typeof FromSlipServerSchema>
 
-const WebSocketOpenEventResponseSchema = z.discriminatedUnion('type', [AcceptEventSchema, SetMetadataEventSchema])
-export type WebSocketOpenEventResponse = z.infer<typeof WebSocketOpenEventResponseSchema>
+const WebSocketOpenEventResponseSchema = discriminatedUnion('type', [AcceptEventSchema, SetMetadataEventSchema])
+export type WebSocketOpenEventResponse = zInfer<typeof WebSocketOpenEventResponseSchema>
 
-export const EventRequestDataSchema = z.object({
-  connectionId: z.string(),
-  metadata: z.nullable(z.unknown()),
-  events: z.array(FromSlipServerSchema),
+export const EventRequestDataSchema = zObject({
+  connectionId: zString(),
+  metadata: zNullable(zUnknown()),
+  events: zArray(FromSlipServerSchema),
 })
 
-export type EventRequestData = z.infer<typeof EventRequestDataSchema>
+export type EventRequestData = zInfer<typeof EventRequestDataSchema>
 
-export const EventResponseDataSchema = z.object({
-  events: z.array(z.discriminatedUnion('type', [
+export const EventResponseDataSchema = zObject({
+  events: zArray(discriminatedUnion('type', [
     // Connection Events
     AcceptEventSchema,
     CloseEventSchema,
@@ -88,12 +88,12 @@ export const EventResponseDataSchema = z.object({
   ])),
 })
 
-export type EventResponseData = z.infer<typeof EventResponseDataSchema>
+export type EventResponseData = zInfer<typeof EventResponseDataSchema>
 
 export type EventResponseEvent = EventResponseData['events'][0]
 
 // CONTROL EVENTS
-const ControlEventSchema = z.discriminatedUnion('type', [
+const ControlEventSchema = discriminatedUnion('type', [
   // Connection Events without Accept but with PollForConnection
   PollForConnectionEventSchema,
   CloseEventSchema,
@@ -106,10 +106,10 @@ const ControlEventSchema = z.discriminatedUnion('type', [
   CloseChannelEventSchema,
 ])
 
-export type ControlEvent = z.infer<typeof ControlEventSchema>
+export type ControlEvent = zInfer<typeof ControlEventSchema>
 
-export const ControlEventRequestDataSchema = z.object({
-  events: z.array(ControlEventSchema),
+export const ControlEventRequestDataSchema = zObject({
+  events: zArray(ControlEventSchema),
 })
 
 /**
