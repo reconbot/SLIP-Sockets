@@ -45,7 +45,7 @@
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "dynalite": "^3.2.2",
-    "esbuild-register": "3.4.2",
+    "esbuild-register": "3.5.0",
     "portfinder": "^1.0.32",
     "streaming-iterables": "8.0.1",
     "ts-node": "10.9.1",
