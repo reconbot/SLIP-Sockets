@@ -112,8 +112,8 @@ importers:
         specifier: ^1.0.32
         version: 1.0.32
       streaming-iterables:
-        specifier: 8.0.0
-        version: 8.0.0
+        specifier: 8.0.1
+        version: 8.0.1
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@20.6.5)(typescript@5.2.2)
@@ -4871,8 +4871,8 @@ packages:
       mixme: 0.5.9
     dev: true
 
-  /streaming-iterables@8.0.0:
-    resolution: {integrity: sha512-o0TmSGXWawZGbygg1xnvEMup+HIQSu2M3iMUBLvYFBVSZKJNOi6WG6rvuEtDEUlbH4eimtf7Aitot3V4tSru4w==}
+  /streaming-iterables@8.0.1:
+    resolution: {integrity: sha512-yfQdmUB1b+rGLZkD/r6YisT/eNOjZxBAckXKlzYNmRJnwSzHaiScykD8gsQceFcShtK09qAbLhOqvzIpnBPoDQ==}
     engines: {node: '>=18'}
     dev: true
 
