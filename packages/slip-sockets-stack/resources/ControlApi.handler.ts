@@ -1,9 +1,11 @@
-import type { APIGatewayProxyHandlerV2 } from 'aws-lambda'
+import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { APIGWebSocketController } from './APIGWebSocketController'
-import { parseControlPlaneCommands, processCommand } from './commands'
-import { JWT } from 'slip-sockets'
+import { processControlEvent } from './processControlEvent'
+import { ControlEvent, JWT } from 'slip-sockets'
 import { DDBClient } from './DDBClient'
 import { parseBody } from './parseBody'
+import { ControlEventRequestDataSchema } from 'slip-sockets'
+import { ControlAPIInvokeEvent } from './types'
 
 const CALLBACK_URL = process.env.CALLBACK_URL
 if (!CALLBACK_URL) {
@@ -21,10 +23,23 @@ if (!DDB_CONNECTIONS_TABLE) {
 }
 
 const jwt = new JWT({ jwtSecret: JWT_SECRET })
-const wsClient = new APIGWebSocketController(CALLBACK_URL)
-const ddbClient = new DDBClient(DDB_CONNECTIONS_TABLE)
+const wsClient = new APIGWebSocketController({ callbackUrl: CALLBACK_URL })
+const ddbClient = new DDBClient({ tableName: DDB_CONNECTIONS_TABLE })
 
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+const processEvents = async (events: ControlEvent[]) => {
+  for (const event of events) {
+    await processControlEvent({ ddbClient, wsClient, event })
+  }
+}
+
+export const handler = async (event: APIGatewayProxyEventV2 | ControlAPIInvokeEvent): Promise<APIGatewayProxyResultV2> => {
+  if ('type' in event) {
+    console.log('websocket enqueue')
+    await processEvents(event.events)
+    return {
+      statusCode: 200,
+    }
+  }
   if (!jwt.verifyAuthTokenFromHeader(event.headers.authorization || event.headers.Authorization, 'ControlEvent')) {
     return {
       statusCode: 403,
@@ -32,18 +47,16 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     }
   }
   const body = parseBody(event)
-  const commands = parseControlPlaneCommands(body)
-  if (!commands) {
-    console.error({ body, commands })
+  const results = ControlEventRequestDataSchema.safeParse(body)
+  if (!results.success) {
+    console.error({ body, error: results.error })
     return {
       statusCode: 400,
       body: '{"message": "invalid commands"}',
     }
   }
 
-  for (const command of commands) {
-    await processCommand({ ddbClient, wsClient, command })
-  }
+  await processEvents(results.data.events)
 
   return {
     statusCode: 200,

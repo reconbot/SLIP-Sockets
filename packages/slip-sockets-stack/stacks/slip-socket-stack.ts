@@ -29,6 +29,8 @@ export class SlipSocketStack extends cdk.Stack {
       connectionsTable: ddb.connections,
     })
 
+    webSocket.registerControlLambda(controlApi.lambda)
+
     new cdk.CfnOutput(this, 'region', {
       value: cdk.Stack.of(this).region,
     })

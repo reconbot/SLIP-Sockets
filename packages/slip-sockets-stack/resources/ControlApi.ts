@@ -11,6 +11,7 @@ import { Table } from 'aws-cdk-lib/aws-dynamodb'
 
 export class ControlApi extends Construct {
   url: string
+  lambda: NodejsFunction
 
   constructor(scope: Construct, id: string, {
     webSocket,
@@ -36,6 +37,7 @@ export class ControlApi extends Construct {
       },
       logRetention: RetentionDays.THREE_MONTHS,
     })
+    this.lambda = eventHandler
     webSocket.stage.grantManagementApiAccess(eventHandler)
     connectionsTable.grantReadWriteData(eventHandler)
 

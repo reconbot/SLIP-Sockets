@@ -32,8 +32,8 @@
     "clean": "rm -rf dist",
     "build": "rollup -c && node bundle-types.mjs",
     "cdk": "cdk",
-    "deploy:production": "cdk deploy '*production' --outputs-file ./cdk-outputs.json",
-    "deploy:staging": "cdk deploy '*staging' --outputs-file ./cdk-outputs.json"
+    "deploy": "cdk deploy",
+    "test": "node -r esbuild-register --test ./**/*.test.ts"
   },
   "keywords": [
     "websockets",
@@ -44,17 +44,21 @@
   ],
   "license": "GPL-3.0-or-later",
   "devDependencies": {
+    "dynalite": "^3.2.2",
+    "esbuild-register": "3.4.2",
+    "portfinder": "^1.0.32",
     "streaming-iterables": "8.0.0",
     "ts-node": "10.9.1",
     "wscat": "5.2.0"
   },
   "dependencies": {
-    "slip-sockets": "workspace:*",
     "@aws-cdk/aws-apigatewayv2-alpha": "2.93.0-alpha.0",
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.93.0-alpha.0",
     "@aws-sdk/client-apigatewaymanagementapi": "3.405.0",
     "@aws-sdk/client-dynamodb": "3.405.0",
+    "@aws-sdk/client-lambda": "^3.414.0",
     "@aws-sdk/lib-dynamodb": "3.405.0",
+    "slip-sockets": "workspace:*",
     "source-map-support": "0.5.21"
   },
   "peerDependencies": {
