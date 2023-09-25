@@ -1,5 +1,11 @@
 # slip-sockets
 
+## 4.0.1
+
+### Patch Changes
+
+- 79eed91: chore(deps): update aws deps
+
 ## 4.0.0
 
 ### Major Changes

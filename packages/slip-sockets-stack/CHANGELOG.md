@@ -1,5 +1,13 @@
 # @slip-sockets/stack
 
+## 4.0.1
+
+### Patch Changes
+
+- 79eed91: chore(deps): update aws deps
+- Updated dependencies [79eed91]
+  - slip-sockets@4.0.1
+
 ## 4.0.0
 
 ### Major Changes
