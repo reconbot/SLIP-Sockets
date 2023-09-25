@@ -10,7 +10,7 @@ It takes a slightly annoying api from api gateway and makes it straight forward 
 ```ts
 // In you application callback handler
 
-const wsPublisher = new SlipSocketPublisher({ controlApi: CONTROL_API, jwtSecret: JWT_SECRET })
+const wsPublisher = new SlipSocketPublisher({ controlApi, jwtSecret })
 
 export async function POST(request: Request) {
   const connection = await wsPublisher.parseRequest(request)
