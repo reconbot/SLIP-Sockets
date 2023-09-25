@@ -52,8 +52,9 @@ export const processControlEvent = async ({ ddbClient, wsClient, event }: { ddbC
   }
 
   if (event.type === 'POLL_FOR_CONNECTION') {
+    const now = Date.now()
     const info = await wsClient.pollForConnection(event.connectionId, event.timeout)
-    console.log({ POLL_FOR_CONNECTION: info })
+    console.log({ POLL_FOR_CONNECTION: info, duration: Date.now() - now })
     return
   }
 
