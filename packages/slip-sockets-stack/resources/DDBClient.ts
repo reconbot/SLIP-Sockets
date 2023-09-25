@@ -1,6 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { DynamoDBDocument, QueryCommandInput } from '@aws-sdk/lib-dynamodb'
-import { JsonValue } from 'slip-sockets/lib/types'
+import { JsonValue } from 'slip-sockets'
 import { consume, map, pipeline, transform } from 'streaming-iterables'
 
 type Connection = {

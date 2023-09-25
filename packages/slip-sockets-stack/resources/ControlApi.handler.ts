@@ -4,7 +4,7 @@ import { processControlEvent } from './processControlEvent'
 import { ControlEvent, JWT } from 'slip-sockets'
 import { DDBClient } from './DDBClient'
 import { parseBody } from './parseBody'
-import { ControlEventRequestDataSchema } from 'slip-sockets/lib/types'
+import { ControlEventRequestDataSchema } from 'slip-sockets'
 import { ControlAPIInvokeEvent } from './types'
 
 const CALLBACK_URL = process.env.CALLBACK_URL

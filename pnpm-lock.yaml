@@ -107,7 +107,7 @@ importers:
         version: 3.2.2
       esbuild-register:
         specifier: 3.4.2
-        version: 3.4.2(esbuild@0.19.2)
+        version: 3.4.2(esbuild@0.19.3)
       portfinder:
         specifier: ^1.0.32
         version: 1.0.32
@@ -3206,6 +3206,17 @@ packages:
       is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
+    dev: true
+
+  /esbuild-register@3.4.2(esbuild@0.19.3):
+    resolution: {integrity: sha512-kG/XyTDyz6+YDuyfB9ZoSIOOmgyFCH+xPRtsCa8W85HLRV5Csp+o3jWVbOSHgSLfyLc5DmP+KFDNwty4mEjC+Q==}
+    peerDependencies:
+      esbuild: '>=0.12 <1'
+    dependencies:
+      debug: 4.3.4
+      esbuild: 0.19.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /esbuild-register@3.5.0(esbuild@0.19.3):

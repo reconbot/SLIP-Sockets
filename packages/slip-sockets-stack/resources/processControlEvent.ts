@@ -1,5 +1,5 @@
 import { consume, pipeline, transform } from 'streaming-iterables'
-import { ControlEvent, JsonValue } from 'slip-sockets/lib/types'
+import { ControlEvent, JsonValue } from 'slip-sockets'
 import { assertUnreachable } from './assertUnreachable'
 import { DDBClient } from './DDBClient'
 import { APIGWebSocketController, ignoreDisconnected } from './APIGWebSocketController'

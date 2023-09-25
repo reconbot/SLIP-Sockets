@@ -1,4 +1,3 @@
-// @ts-ignore
 import createServer from 'dynalite'
 import { Server } from 'http'
 import { CreateTableCommand, DynamoDBClient } from '@aws-sdk/client-dynamodb'
