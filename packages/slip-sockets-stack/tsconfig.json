@@ -15,7 +15,7 @@
   },
   "include": ["bin", "resources", "stacks"],
   "exclude": [
-    "./**/*-test.ts",
+    "./**/*.test.ts",
   ],
   // necessary for tests
   "ts-node": {

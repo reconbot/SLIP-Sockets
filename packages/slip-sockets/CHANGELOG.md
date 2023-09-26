@@ -1,5 +1,11 @@
 # slip-sockets
 
+## 4.0.2
+
+### Patch Changes
+
+- Fix parsing of requests
+
 ## 4.0.1
 
 ### Patch Changes

@@ -15,7 +15,7 @@
   "include": ["lib"],
   "exclude": [
     "node_modules",
-    "lib/*-test.ts",
+    "lib/*.test.ts",
     "dist",
   ],
   // necessary for tests

@@ -1,6 +1,6 @@
 {
   "name": "slip-sockets",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
   "author": {
     "name": "Francis Gulotta",
@@ -27,7 +27,7 @@
   "repository": "git@github.com:reconbot/SLIP-Sockets.git",
   "homepage": "https://github.com/reconbot/SLIP-Sockets",
   "scripts": {
-    "test": "node -r esbuild-register --test lib/*-test.ts",
+    "test": "node -r esbuild-register --test lib/*.test.ts",
     "lint": "tsc && eslint lib/**/*.ts",
     "format": "eslint lib/**/*.ts --fix",
     "clean": "rm -rf dist",

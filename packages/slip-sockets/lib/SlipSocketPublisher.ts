@@ -22,7 +22,7 @@ export class SlipSocketPublisher {
       return null
     }
 
-    const events = EventRequestDataSchema.safeParse(await request.text())
+    const events = EventRequestDataSchema.safeParse(await request.json())
     if (!events.success) {
       console.error('cannot parse events', events.error)
       return null
