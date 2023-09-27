@@ -1,4 +1,4 @@
-import { EventRequestData, EventResponseEvent, FromSlipServer, JsonObject } from './types'
+import { EventRequestData, EventResponseData, EventResponseEvent, FromSlipServer, JsonObject } from './types'
 
 export class SlipSocketConnection {
   connectionId: string
@@ -72,7 +72,8 @@ export class SlipSocketConnection {
     if (this.closed) {
       events.push({ type: 'CLOSE', connectionId })
     }
-    return new Response(JSON.stringify(events), {
+    const data: EventResponseData = { events }
+    return new Response(JSON.stringify(data), {
       status: 200,
     })
   }
