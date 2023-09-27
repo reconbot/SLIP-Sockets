@@ -1,5 +1,11 @@
 # slip-sockets
 
+## 4.0.4
+
+### Patch Changes
+
+- We now properly respond to slip socket event requests
+
 ## 4.0.3
 
 ### Patch Changes
