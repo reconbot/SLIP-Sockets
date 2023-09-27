@@ -1,5 +1,13 @@
 # @slip-sockets/stack
 
+## 4.0.3
+
+### Patch Changes
+
+- Fix request parsing in lambda handlers
+- Updated dependencies
+  - slip-sockets@4.0.3
+
 ## 4.0.2
 
 ### Patch Changes

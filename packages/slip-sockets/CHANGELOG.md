@@ -1,5 +1,11 @@
 # slip-sockets
 
+## 4.0.3
+
+### Patch Changes
+
+- Fix request parsing in lambda handlers
+
 ## 4.0.2
 
 ### Patch Changes
