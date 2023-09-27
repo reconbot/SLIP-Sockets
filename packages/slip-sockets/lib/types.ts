@@ -112,6 +112,8 @@ export const ControlEventRequestDataSchema = zObject({
   events: zArray(ControlEventSchema),
 })
 
+export type ControlEventRequestData = zInfer<typeof ControlEventRequestDataSchema>
+
 /**
 Stolen from (type-fest)[https://github.com/sindresorhus/type-fest]
 

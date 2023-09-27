@@ -1,7 +1,7 @@
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { APIGWebSocketController } from './APIGWebSocketController'
 import { processControlEvent } from './processControlEvent'
-import { ControlEvent, JWT } from 'slip-sockets'
+import { ControlEvent, ControlEventRequestData, JWT } from 'slip-sockets'
 import { DDBClient } from './DDBClient'
 import { parseBody } from './parseBody'
 import { ControlEventRequestDataSchema } from 'slip-sockets'
@@ -46,17 +46,24 @@ export const handler = async (event: APIGatewayProxyEventV2 | ControlAPIInvokeEv
       body: 'Invalid token',
     }
   }
-  const body = parseBody(event)
-  const results = ControlEventRequestDataSchema.safeParse(body)
-  if (!results.success) {
-    console.error({ body, error: results.error })
+
+  let body: string | undefined
+  let data: ControlEventRequestData
+  try {
+    body = parseBody(event)
+    if (!body) {
+      throw new Error('body is undefined')
+    }
+    data = ControlEventRequestDataSchema.parse(JSON.parse(body))
+  } catch (error) {
+    console.error({ body, error })
     return {
       statusCode: 400,
       body: '{"message": "invalid commands"}',
     }
   }
 
-  await processEvents(results.data.events)
+  await processEvents(data.events)
 
   return {
     statusCode: 200,

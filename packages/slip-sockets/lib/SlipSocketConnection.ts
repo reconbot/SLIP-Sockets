@@ -1,6 +1,6 @@
 import { EventRequestData, EventResponseEvent, FromSlipServer, JsonObject } from './types'
 
-export class SlipSocketEvent {
+export class SlipSocketConnection {
   connectionId: string
   inEvents: FromSlipServer[]
   outEvents: EventResponseEvent[]

@@ -1,6 +1,6 @@
 import { JWT } from './JWT'
 import { ControlEvent, EventRequestDataSchema } from './types'
-import { SlipSocketEvent } from './SlipSocketConnection'
+import { SlipSocketConnection } from './SlipSocketConnection'
 
 export interface SlipSocketPublisherOptions {
   controlApi: string
@@ -16,7 +16,7 @@ export class SlipSocketPublisher {
     this.jwt = new JWT({ jwtSecret })
   }
 
-  async parseRequest(request: Request): Promise<SlipSocketEvent | null> {
+  async parseRequest(request: Request): Promise<SlipSocketConnection | null> {
     if (!this.jwt.verifyAuthTokenFromHeader(request.headers.get('authorization'), 'WebSocketEvent')) {
       console.error('bad token')
       return null
@@ -27,7 +27,7 @@ export class SlipSocketPublisher {
       console.error('cannot parse events', events.error)
       return null
     }
-    return new SlipSocketEvent(events.data)
+    return new SlipSocketConnection(events.data)
   }
 
   async send(events: ControlEvent[]) {

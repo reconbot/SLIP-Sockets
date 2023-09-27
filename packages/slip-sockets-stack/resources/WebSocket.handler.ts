@@ -1,5 +1,5 @@
 import type { APIGatewayProxyWebsocketEventV2, APIGatewayProxyWebsocketHandlerV2 } from 'aws-lambda'
-import { JWT, ControlEvent, EventRequestData, EventResponseDataSchema, FromSlipServer, WebSocketOpenEventResponse, SetMetaDataEvent } from 'slip-sockets'
+import { JWT, ControlEvent, EventRequestData, EventResponseDataSchema, FromSlipServer, WebSocketOpenEventResponse, SetMetaDataEvent, EventResponseData } from 'slip-sockets'
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda'
 import { processControlEvent } from './processControlEvent'
 import { APIGWebSocketController } from './APIGWebSocketController'
@@ -119,11 +119,13 @@ export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
     }
   }
 
-  const body = await response.text()
-
-  const results = EventResponseDataSchema.safeParse(body)
-  if (!results.success) {
-    console.error({ body, error: results.error })
+  let data: EventResponseData
+  let body: unknown
+  try {
+    body = await response.json()
+    data = EventResponseDataSchema.parse(body)
+  } catch (error) {
+    console.error({ body, error })
     return {
       statusCode: 400,
       body: '{"message": "invalid commands"}',
@@ -135,7 +137,7 @@ export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
   // this allows for an ordered of events that makes sense to the developer
 
   if (event.requestContext.eventType !== 'CONNECT') {
-    const controlPlaneBackendEvents = results.data.events.filter(event => event.type !== 'ACCEPT') as ControlEvent[]
+    const controlPlaneBackendEvents = data.events.filter(event => event.type !== 'ACCEPT') as ControlEvent[]
 
     for (const event of controlPlaneBackendEvents) {
       // TODO how does this even work? Can I do this before this function returns?
@@ -149,7 +151,7 @@ export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
   const openEvents: WebSocketOpenEventResponse[] = []
   const controlEvents: ControlEvent[] = []
 
-  for (const event of results.data.events) {
+  for (const event of data.events) {
     if (event.type === 'ACCEPT') {
       openEvents.push(event)
       continue
