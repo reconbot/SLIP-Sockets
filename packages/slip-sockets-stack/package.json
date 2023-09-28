@@ -1,6 +1,6 @@
 {
   "name": "@slip-sockets/stack",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
   "author": {
     "name": "Francis Gulotta",

@@ -30,7 +30,7 @@ export async function startDevDB({ verbose = false, debug = false, port: provide
       },
     ],
     GlobalSecondaryIndexes: [{
-      IndexName: 'gsi1',
+      IndexName: 'GSI1',
       KeySchema: [
         {
           AttributeName: 'gsi1pk',

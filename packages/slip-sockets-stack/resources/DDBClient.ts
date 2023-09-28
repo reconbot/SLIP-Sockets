@@ -221,7 +221,7 @@ export class DDBClient {
   itrSubscriptionsByChannel(channel: string) {
     return pipeline(
       () => this.query({
-        IndexName: 'gsi1',
+        IndexName: 'GSI1',
         KeyConditions: {
           gsi1pk: {
             AttributeValueList: [`Subscription#${channel}`],
