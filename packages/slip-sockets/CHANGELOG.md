@@ -1,5 +1,11 @@
 # slip-sockets
 
+## 4.0.5
+
+### Patch Changes
+
+- 48310c6: Improve the errors slightly
+
 ## 4.0.4
 
 ### Patch Changes
