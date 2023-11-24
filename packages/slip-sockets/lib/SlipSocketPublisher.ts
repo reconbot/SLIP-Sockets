@@ -18,13 +18,13 @@ export class SlipSocketPublisher {
 
   async parseRequest(request: Request): Promise<SlipSocketConnection | null> {
     if (!this.jwt.verifyAuthTokenFromHeader(request.headers.get('authorization'), 'WebSocketEvent')) {
-      console.error('bad token')
+      console.error('".parseRequest" bad JWT token')
       return null
     }
 
     const events = EventRequestDataSchema.safeParse(await request.json())
     if (!events.success) {
-      console.error('cannot parse events', events.error)
+      console.error('".parseRequest" cannot parse events', events.error)
       return null
     }
     return new SlipSocketConnection(events.data)
@@ -39,12 +39,14 @@ export class SlipSocketPublisher {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/websocket-events',
       },
+    }).catch((err) => {
+      throw new Error(`".send" ControlAPI failure: ${err.message}`, { cause: err })
     })
     if (!response.ok) {
       const text = await response.text()
       const { status, statusText } = response
       console.error({ token, status, statusText, text, body: JSON.stringify(events), controlApi: this.controlApi })
-      throw new Error(response.statusText)
+      throw new Error(`".send" ControlAPI failure: ${response.statusText}`)
     }
   }
 }
