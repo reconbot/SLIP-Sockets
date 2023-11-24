@@ -34,7 +34,7 @@ export class SlipSocketPublisher {
     const token = this.jwt.generateToken({ audience: 'ControlEvent', expiresIn: '1m' })
     const response = await fetch(this.controlApi, {
       method: 'POST',
-      body: JSON.stringify(events),
+      body: JSON.stringify({events}),
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/websocket-events',
