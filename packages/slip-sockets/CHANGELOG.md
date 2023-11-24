@@ -1,5 +1,11 @@
 # slip-sockets
 
+## 4.0.6
+
+### Patch Changes
+
+- 1d59677: Fix SlipSocketPublisher.send so that it sends a well formed request.
+
 ## 4.0.5
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @slip-sockets/stack
 
+## 4.0.7
+
+### Patch Changes
+
+- Updated dependencies [1d59677]
+  - slip-sockets@4.0.6
+
 ## 4.0.6
 
 ### Patch Changes
