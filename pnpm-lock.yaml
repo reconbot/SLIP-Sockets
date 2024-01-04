@@ -21,8 +21,8 @@ importers:
         specifier: 11.1.5
         version: 11.1.5(rollup@4.9.2)(tslib@2.6.2)(typescript@5.3.3)
       '@types/aws-lambda':
-        specifier: 8.10.130
-        version: 8.10.130
+        specifier: 8.10.131
+        version: 8.10.131
       '@types/jsonwebtoken':
         specifier: 9.0.5
         version: 9.0.5
@@ -2244,8 +2244,8 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@types/aws-lambda@8.10.130:
-    resolution: {integrity: sha512-HxTfLeGvD1wTJqIGwcBCpNmHKenja+We1e0cuzeIDFfbEj3ixnlTInyPR/81zAe0Ss/Ip12rFK6XNeMLVucOSg==}
+  /@types/aws-lambda@8.10.131:
+    resolution: {integrity: sha512-IWmFpqnVDvskYWnNSiu/qlRn80XlIOU0Gy5rKCl/NjhnI95pV8qIHs6L5b+bpHhyzuOSzjLgBcwgFSXrC1nZWA==}
     dev: true
 
   /@types/estree@1.0.1:
