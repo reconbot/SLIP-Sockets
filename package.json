@@ -22,7 +22,7 @@
     "esbuild": "0.23.0",
     "esbuild-register": "3.5.0",
     "eslint": "8.57.0",
-    "rollup": "4.17.2",
+    "rollup": "4.18.0",
     "tslib": "2.6.3",
     "typescript": "5.4.5"
   }
