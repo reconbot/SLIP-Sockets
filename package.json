@@ -13,7 +13,7 @@
     "@rollup/plugin-commonjs": "^26.0.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-typescript": "11.1.6",
-    "@types/aws-lambda": "8.10.141",
+    "@types/aws-lambda": "8.10.142",
     "@types/jsonwebtoken": "9.0.6",
     "@types/node": "20.8.7",
     "@typescript-eslint/eslint-plugin": "7.17.0",
