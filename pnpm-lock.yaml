@@ -118,8 +118,8 @@ importers:
         specifier: 10.9.1
         version: 10.9.1(@types/node@20.8.7)(typescript@5.6.2)
       wscat:
-        specifier: 5.2.0
-        version: 5.2.0
+        specifier: 5.2.2
+        version: 5.2.2
 
 packages:
 
@@ -5248,8 +5248,8 @@ packages:
         optional: true
     dev: true
 
-  /wscat@5.2.0:
-    resolution: {integrity: sha512-UkVzuBdv3jk1Nt0mVCTw0wt/2kGPXry9MZMMUHYE/kEIJdtz1Ez28HD2WQdapC75tM10KZVL8EHG1/WHFK9dtw==}
+  /wscat@5.2.2:
+    resolution: {integrity: sha512-Vp+vbJbCROCO3FJ1rBnbjcoAyDuOVAtSobaXliEYk+ngLXVlmoyjBsd7rsHgVWZNsToxMlh1wf99VVJOswC9GA==}
     hasBin: true
     dependencies:
       commander: 9.5.0
