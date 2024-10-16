@@ -70,10 +70,10 @@ importers:
     dependencies:
       '@aws-cdk/aws-apigatewayv2-alpha':
         specifier: 2.93.0-alpha.0
-        version: 2.93.0-alpha.0(aws-cdk-lib@2.93.0)(constructs@10.2.70)
+        version: 2.93.0-alpha.0(aws-cdk-lib@2.162.1)(constructs@10.2.70)
       '@aws-cdk/aws-apigatewayv2-integrations-alpha':
         specifier: 2.93.0-alpha.0
-        version: 2.93.0-alpha.0(@aws-cdk/aws-apigatewayv2-alpha@2.93.0-alpha.0)(aws-cdk-lib@2.93.0)(constructs@10.2.70)
+        version: 2.93.0-alpha.0(@aws-cdk/aws-apigatewayv2-alpha@2.93.0-alpha.0)(aws-cdk-lib@2.162.1)(constructs@10.2.70)
       '@aws-sdk/client-apigatewaymanagementapi':
         specifier: 3.418.0
         version: 3.418.0
@@ -87,11 +87,11 @@ importers:
         specifier: 3.418.0
         version: 3.418.0(@aws-sdk/client-dynamodb@3.418.0)
       aws-cdk:
-        specifier: 2.97.1
-        version: 2.97.1
+        specifier: 2.162.1
+        version: 2.162.1
       aws-cdk-lib:
-        specifier: 2.97.1
-        version: 2.93.0(constructs@10.2.70)
+        specifier: 2.162.1
+        version: 2.162.1(constructs@10.2.70)
       constructs:
         specifier: 10.2.70
         version: 10.2.70
@@ -116,7 +116,7 @@ importers:
         version: 8.0.1
       ts-node:
         specifier: 10.9.1
-        version: 10.9.1(@types/node@22.7.5)(typescript@5.6.3)
+        version: 10.9.1(@types/node@20.8.7)(typescript@5.6.3)
       wscat:
         specifier: 5.2.0
         version: 5.2.0
@@ -140,18 +140,18 @@ packages:
     resolution: {integrity: sha512-7bY3J8GCVxLupn/kNmpPc5VJz8grx+4RKfnnJiO1LG+uxkZfANZG3RMHhE+qQxxwkyQ9/MfPtTpf748UhR425A==}
     dev: false
 
-  /@aws-cdk/aws-apigatewayv2-alpha@2.93.0-alpha.0(aws-cdk-lib@2.93.0)(constructs@10.2.70):
+  /@aws-cdk/aws-apigatewayv2-alpha@2.93.0-alpha.0(aws-cdk-lib@2.162.1)(constructs@10.2.70):
     resolution: {integrity: sha512-hu+JE1M+P/fI4/78e7zCBJeYE9KArzM6x2jcetbEeWUWet/oxj+CZtI3hWYOn1+42pNAxaMm6EaUWqSfL8TCMg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       aws-cdk-lib: 2.93.0
       constructs: ^10.0.0
     dependencies:
-      aws-cdk-lib: 2.93.0(constructs@10.2.70)
+      aws-cdk-lib: 2.162.1(constructs@10.2.70)
       constructs: 10.2.70
     dev: false
 
-  /@aws-cdk/aws-apigatewayv2-integrations-alpha@2.93.0-alpha.0(@aws-cdk/aws-apigatewayv2-alpha@2.93.0-alpha.0)(aws-cdk-lib@2.93.0)(constructs@10.2.70):
+  /@aws-cdk/aws-apigatewayv2-integrations-alpha@2.93.0-alpha.0(@aws-cdk/aws-apigatewayv2-alpha@2.93.0-alpha.0)(aws-cdk-lib@2.162.1)(constructs@10.2.70):
     resolution: {integrity: sha512-OxYi+R944T3K05l7eHyfHjDsebs49o+zUUTDlU7XDG0GlHf2uRVl1sTmMHA1fvmxqjifEHjN7WRcinhoyBSctA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -159,10 +159,17 @@ packages:
       aws-cdk-lib: 2.93.0
       constructs: ^10.0.0
     dependencies:
-      '@aws-cdk/aws-apigatewayv2-alpha': 2.93.0-alpha.0(aws-cdk-lib@2.93.0)(constructs@10.2.70)
-      aws-cdk-lib: 2.93.0(constructs@10.2.70)
+      '@aws-cdk/aws-apigatewayv2-alpha': 2.93.0-alpha.0(aws-cdk-lib@2.162.1)(constructs@10.2.70)
+      aws-cdk-lib: 2.162.1(constructs@10.2.70)
       constructs: 10.2.70
     dev: false
+
+  /@aws-cdk/cloud-assembly-schema@38.0.1:
+    resolution: {integrity: sha512-KvPe+NMWAulfNVwY7jenFhzhuLhLqJ/OPy5jx7wUstbjnYnjRVLpUHPU3yCjXFE0J8cuJVdx95BJ4rOs66Pi9w==}
+    dev: false
+    bundledDependencies:
+      - jsonschema
+      - semver
 
   /@aws-crypto/crc32@3.0.0:
     resolution: {integrity: sha512-IzSgsrxUcsrejQbPVilIKy16kAT52EwB6zSaI+M3xxIhKh5+aldEyvI+z6erM7TCLB2BJsFrtHjp6/4/sr+3dA==}
@@ -2313,12 +2320,6 @@ packages:
       undici-types: 5.25.3
     dev: true
 
-  /@types/node@22.7.5:
-    resolution: {integrity: sha512-jML7s2NAzMWc//QSJ1a3prpk78cOPchGvXJsC3C6R6PSMoooztvRVQEz89gmBTBY1SPMaqo5teB4uNHPdetShQ==}
-    dependencies:
-      undici-types: 6.19.8
-    dev: true
-
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
@@ -2609,8 +2610,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.93.0(constructs@10.2.70):
-    resolution: {integrity: sha512-kKbcKkts272Ju5xjGKI3pXTOpiJxW4OQbDF8Vmw/NIkkuJLo8GlRCFfeOfoN/hilvlYQgENA67GCgSWccbvu7w==}
+  /aws-cdk-lib@2.162.1(constructs@10.2.70):
+    resolution: {integrity: sha512-XiZLVE5ISNajNNmLye8l5w4EGqm6/d8C8shw63QwxaRVYdHl5e+EAaUEmZJpWc4sYtY/sS+GHOfhoKFLjha2rg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -2618,6 +2619,7 @@ packages:
       '@aws-cdk/asset-awscli-v1': 2.2.207
       '@aws-cdk/asset-kubectl-v20': 2.1.3
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.0
+      '@aws-cdk/cloud-assembly-schema': 38.0.1
       constructs: 10.2.70
     dev: false
     bundledDependencies:
@@ -2631,9 +2633,10 @@ packages:
       - semver
       - table
       - yaml
+      - mime-types
 
-  /aws-cdk@2.97.1:
-    resolution: {integrity: sha512-RgWdcXyTL3Iau9uqXAyczFLPh/XqCHmzn+PbrkKzrxwITkw3u1T+QI15/BgvcfIySmvA2ftHPpOvXiIgEMNohw==}
+  /aws-cdk@2.162.1:
+    resolution: {integrity: sha512-p9WeiJ7wfiWj0Bpr1HhNdWENf0TxSZN73JtNqvqyaK6SptiLJc+R+ELo0hF3qKT99NWHTCbwWA/JH3BvEXbFxA==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
     optionalDependencies:
@@ -4914,7 +4917,7 @@ packages:
       typescript: 5.6.3
     dev: true
 
-  /ts-node@10.9.1(@types/node@22.7.5)(typescript@5.6.3):
+  /ts-node@10.9.1(@types/node@20.8.7)(typescript@5.6.3):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -4933,7 +4936,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.7.5
+      '@types/node': 20.8.7
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -5058,10 +5061,6 @@ packages:
 
   /undici-types@5.25.3:
     resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
-    dev: true
-
-  /undici-types@6.19.8:
-    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
     dev: true
 
   /universalify@0.1.2:
