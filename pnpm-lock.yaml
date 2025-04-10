@@ -24,8 +24,8 @@ importers:
         specifier: 8.10.149
         version: 8.10.149
       '@types/jsonwebtoken':
-        specifier: 9.0.7
-        version: 9.0.7
+        specifier: 9.0.9
+        version: 9.0.9
       '@types/node':
         specifier: 22.8.2
         version: 22.8.2
@@ -2338,14 +2338,19 @@ packages:
       ci-info: 3.8.0
     dev: true
 
-  /@types/jsonwebtoken@9.0.7:
-    resolution: {integrity: sha512-ugo316mmTYBl2g81zDFnZ7cfxlut3o+/EQdaP7J8QN2kY6lJ22hmQYCK5EHcJHbrW+dkCGSCPgbG8JtYj6qSrg==}
+  /@types/jsonwebtoken@9.0.9:
+    resolution: {integrity: sha512-uoe+GxEuHbvy12OUQct2X9JenKM3qAscquYymuQN4fMWG9DBQtykrQEFcAbVACF7qaLw9BePSodUL0kquqBJpQ==}
     dependencies:
+      '@types/ms': 2.1.0
       '@types/node': 22.8.2
     dev: true
 
   /@types/minimist@1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
+    dev: true
+
+  /@types/ms@2.1.0:
+    resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
     dev: true
 
   /@types/node@12.20.55:
