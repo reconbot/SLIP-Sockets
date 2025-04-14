@@ -2,7 +2,7 @@
   "name": "slip-sockets-monorepo",
   "private": true,
   "description": "A serverless GRIP/Pushpin like WebSocket server for AWS API Gateway",
-  "packageManager": "pnpm@8.8.0",
+  "packageManager": "pnpm@10.8.1",
   "engines": {
     "node": ">=18"
   },
