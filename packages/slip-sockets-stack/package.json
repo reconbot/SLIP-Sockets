@@ -54,10 +54,10 @@
   "dependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "2.93.0-alpha.0",
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.93.0-alpha.0",
-    "@aws-sdk/client-apigatewaymanagementapi": "3.418.0",
-    "@aws-sdk/client-dynamodb": "3.418.0",
+    "@aws-sdk/client-apigatewaymanagementapi": "3.787.0",
+    "@aws-sdk/client-dynamodb": "3.788.0",
     "@aws-sdk/client-lambda": "^3.414.0",
-    "@aws-sdk/lib-dynamodb": "3.418.0",
+    "@aws-sdk/lib-dynamodb": "3.789.0",
     "slip-sockets": "workspace:*",
     "source-map-support": "0.5.21"
   },
