@@ -62,7 +62,7 @@
     "source-map-support": "0.5.21"
   },
   "peerDependencies": {
-    "aws-cdk": "2.97.1",
+    "aws-cdk": "2.1010.0",
     "aws-cdk-lib": "2.97.1",
     "constructs": "10.2.70"
   }
