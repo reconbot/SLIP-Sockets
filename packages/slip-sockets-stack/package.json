@@ -49,7 +49,7 @@
     "portfinder": "^1.0.32",
     "streaming-iterables": "8.0.1",
     "ts-node": "10.9.1",
-    "wscat": "5.2.0"
+    "wscat": "5.2.2"
   },
   "dependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "2.93.0-alpha.0",
