@@ -48,7 +48,7 @@
     "esbuild-register": "3.6.0",
     "portfinder": "^1.0.32",
     "streaming-iterables": "8.0.1",
-    "ts-node": "10.9.1",
+    "ts-node": "10.9.2",
     "wscat": "5.2.0"
   },
   "dependencies": {
