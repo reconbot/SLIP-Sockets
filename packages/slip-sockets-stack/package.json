@@ -64,6 +64,6 @@
   "peerDependencies": {
     "aws-cdk": "2.97.1",
     "aws-cdk-lib": "2.97.1",
-    "constructs": "10.2.70"
+    "constructs": "10.4.2"
   }
 }
